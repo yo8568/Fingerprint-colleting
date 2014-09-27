@@ -1,7 +1,23 @@
 <?php 
-$con = new MongoClient("mongodb://localhost");
+//Allow to access domain data
+header("Access-Control-Allow-Origin: * ");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+
+//Connect mongoDB database
+
+$con = new MongoClient("mongodb://140.118.155.213");
 $db = $con->fingerprints;
-$collection = $db->createCollection("csie");
+$collection = $db->createCollection("test");
+
+
+//deal with Ajax request content and add some attribute into DB
+$request_body = file_get_contents('php://input');
+/* php://input 是個可以訪問請求的原始資料的唯讀流
+Coentent-Type僅在取值為application/x-www-data-urlencoded和multipart/form-data兩種情況下，PHP才會將http請求資料包中相應的資料填入全域變數$_POST 
+php://input資料總是跟$HTTP_RAW_POST_DATA相同，但是php://input比$HTTP_RAW_POST_DATA更湊效，且不需要特殊設置php.ini 
+php5.3版本以上的用法
+*/
+
 //judge whether is mobile device or not
 $iPod = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
 $iPhone = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
@@ -19,16 +35,14 @@ $webOS = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
 $BlackBerry = stripos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
 $RimTablet= stripos($_SERVER['HTTP_USER_AGENT'],"RIM Tablet");
 
-
-//deal with Ajax request content and add some attribute into DB
-$request_body = file_get_contents('php://input');
-
 $data = json_decode($request_body,true);
 
 $ip=array('ip'=>$_SERVER['REMOTE_ADDR']);
 array_push($data,$ip);
 date_default_timezone_set('Asia/Taipei');   
-array_push($data,date("Y-m-d H:i:s"));
+$date = date("Y:m:d h:i:s");
+array_push($data,$date);//1
+
 
 //Filter device type
 if( $iPod || $iPhone ){
@@ -57,9 +71,14 @@ if( $iPod || $iPhone ){
 }else{
 
     $no_moblie=false;
-    $no_moblie_d=array('moblie'=>$no_moblie);
+    $no_moblie_d=array('unknown'=>$no_moblie);
     array_push($data,$no_moblie_d);
 }
+
+
+
+
+
 //store and filter the elements in variable $_SERVER  
 if(!function_exists('getallheaders'))
 {
@@ -84,24 +103,14 @@ foreach (getallheaders() as $name => $value)
         $header1[$count]=array($name => $value);
         $count++;
     }
+    $header1[$count]=array($name => $value);
    // array_push($data, $header1);
 }
 
 
 
-
 array_push($data, $header1);
 $collection->insert($data); 
-//print_r($_POST['data']);
-//$collection->insert($_POST['data']);
-//print_r($_POST);
-//print_r($_GET);
-//echo $profile;
-//var_dump($_post);  
-//$collection->insert($_POST['data']); 
-//$json = json_encode($profile);
- //file_put_contents('your_data.txt', $json);
-
 
 
 
