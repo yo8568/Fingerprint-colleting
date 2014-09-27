@@ -1,21 +1,22 @@
 
-          var urls='http://140.118.155.213/m10215040/public_html/PhpProject2/dataset.php';
+          var urls='http://140.118.155.213/m10215040/public_html/test/csie.php';
            
       do {
         
         Fingerprint.init();
-        Fingerprint.events.add(Fingerprint.initFlash,['scripts/Fonts.swf'])
+        Fingerprint.events.add(Fingerprint.initFlash,['Fonts.swf'])
         .add(Fingerprint.updateRTT,[10,urls])
         .add(Fingerprint.updatePlugins,[])
         .add(Fingerprint.updateCSSFonts,[cssFontList])
         .run();
         statusTimeout = setTimeout(onFinish,15000);
         setTimeout(function(){Fingerprint.onFinish(onFinish);},500);
-
+Fingerprint.getUID();
         /*  Fingerprint.onFinish(Fingerprint.submit(urls,'error','success'));*/
         
         var i =0;
 	}while(i);
+  console.log(Fingerprint.status.get());
    function show(){
      var jsonString = JSON.stringify(Fingerprint.getFingerprint());
    
