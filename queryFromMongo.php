@@ -115,11 +115,10 @@ $content=  array(
    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
    <link href="css/bootstrap-responsive.css" rel="stylesheet">
    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
-
-   <style type="text/css">
-
-
-   </style>
+<script type="text/javascript">
+  var day_movlie = JSON.parse(<?php echo json_encode($time_mobile); ?>);
+  console.log(day_movlie);
+</script>
    <script type="text/javascript">
       $(function () {
         $('#container2').highcharts({
