@@ -113,7 +113,7 @@ $content=  array(
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-   <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+   <link href="css/bootstrap-responsive.css" rel="stylesheet">
    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
 
    <style type="text/css">
@@ -158,7 +158,7 @@ $content=  array(
           data: [10,15,9,17,8,22,2,6,7,3,0,1]
        }, {
           name: 'Web',
-          data: []
+          data: [0]
        }]
     });
 });
