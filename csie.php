@@ -1,17 +1,18 @@
 <?php 
-//Allow to access domain data
-header("Access-Control-Allow-Origin: * ");
+//Allow to access the assigned domain data
+header("Access-Control-Allow-Origin: http://kenchang.comze.com ");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
 //Connect mongoDB database
 
-$con = new MongoClient("mongodb://140.118.155.213");
+$con = new MongoClient("mongodb://localhost");
 $db = $con->fingerprints;
 $collection = $db->createCollection("test");
 
 
 //deal with Ajax request content and add some attribute into DB
 $request_body = file_get_contents('php://input');
+
 /* php://input 是個可以訪問請求的原始資料的唯讀流
 Coentent-Type僅在取值為application/x-www-data-urlencoded和multipart/form-data兩種情況下，PHP才會將http請求資料包中相應的資料填入全域變數$_POST 
 php://input資料總是跟$HTTP_RAW_POST_DATA相同，但是php://input比$HTTP_RAW_POST_DATA更湊效，且不需要特殊設置php.ini 
@@ -40,8 +41,8 @@ $data = json_decode($request_body,true);
 $ip=array('ip'=>$_SERVER['REMOTE_ADDR']);
 array_push($data,$ip);
 date_default_timezone_set('Asia/Taipei');   
-$date = date("Y:m:d h:i:s");
-array_push($data,$date);//1
+$date = date("Y:m:d:h:i:s");
+array_push($data,$date);//丟時間進去
 
 
 //Filter device type

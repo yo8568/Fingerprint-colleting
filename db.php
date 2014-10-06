@@ -7,7 +7,7 @@ $collection = $db->createCollection("csie");
 $collection_t = $db->createCollection("test");
    $cursor_t = $collection_t->find();
 } catch (MongoConnectionException $e) {
-  die('Error connecting to MongoDB server');
+  header( 'Location:/errorpage/404.php' ) ;
 } catch (MongoException $e) {
   die('Error: ' . $e->getMessage());
 }
