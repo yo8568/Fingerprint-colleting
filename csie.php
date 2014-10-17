@@ -19,7 +19,29 @@ php://input資料總是跟$HTTP_RAW_POST_DATA相同，但是php://input比$HTTP_
 php5.3版本以上的用法
 */
 
-//judge whether is mobile device or not
+
+$data = json_decode($request_body,true);
+
+$data=device_type($data);
+$data=ip_filter($data);
+$data=server_info($data);
+$collection->insert($data); 
+
+
+
+/****************************************<function>************************************************/
+
+
+
+/*
+* judge whether is mobile device or not
+*
+*@param $_POST
+*@return array[]
+*/
+
+function device_type($data){
+
 $iPod = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
 $iPhone = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
 $iPad = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
@@ -36,15 +58,7 @@ $webOS = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
 $BlackBerry = stripos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
 $RimTablet= stripos($_SERVER['HTTP_USER_AGENT'],"RIM Tablet");
 
-$data = json_decode($request_body,true);
-
-$ip=array('ip'=>$_SERVER['REMOTE_ADDR']);
-array_push($data,$ip);
-date_default_timezone_set('Asia/Taipei');   
-$date = date("Y:m:d:h:i:s");
-array_push($data,$date);//丟時間進去
-
-
+ 
 //Filter device type
 if( $iPod || $iPhone ){
     $ipod_d=array('iPod'=>$iPod);
@@ -75,11 +89,32 @@ if( $iPod || $iPhone ){
     $no_moblie_d=array('unknown'=>$no_moblie);
     array_push($data,$no_moblie_d);
 }
+return $data;
+   
+}
+
+
+/*
+* store ip 
+*
+*@param $_POST
+*@return array[]
+*/
+function ip_filter($data){
+
+$ip=array('ip'=>$_SERVER['REMOTE_ADDR']);
+array_push($data,$ip);
+date_default_timezone_set('Asia/Taipei');   
+$date = date("Y:m:d:h:i:s");
+array_push($data,$date);//丟時間進去
+
+return $data;
+
+}
 
 
 
-
-
+function server_info($data){
 //store and filter the elements in variable $_SERVER  
 if(!function_exists('getallheaders'))
 {
@@ -108,12 +143,9 @@ foreach (getallheaders() as $name => $value)
    // array_push($data, $header1);
 }
 
-
-
 array_push($data, $header1);
-$collection->insert($data); 
+return $data;
 
-
-
+}
 ?>
 
