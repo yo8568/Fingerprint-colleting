@@ -1,13 +1,13 @@
 <?php 
 //Allow to access the assigned domain data
-header("Access-Control-Allow-Origin: http://kenchang.comze.com ");
+header("Access-Control-Allow-Origin: http://www.csie.ntust.edu.tw ");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
 //Connect mongoDB database
 
 $con = new MongoClient("mongodb://localhost");
 $db = $con->fingerprints;
-$collection = $db->createCollection("test");
+$collection = $db->createCollection("csie2");
 
 
 //deal with Ajax request content and add some attribute into DB

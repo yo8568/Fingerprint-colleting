@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <CommunicationClass
+        name="com.datumbox.opensource.dataobjects.Document" x="133" y="159"/>
+    <CommunicationClass
+        name="com.datumbox.opensource.classifiers.NaiveBayes" x="462" y="171">
+        <Association
+            destinationClassName="com.datumbox.opensource.dataobjects.NaiveBayesKnowledgeBase"
+            endpointName="knowledgeBase" kind="Simple"/>
+        <Communication destinationClassName="com.datumbox.opensource.features.FeatureExtraction"/>
+        <Communication destinationClassName="com.datumbox.opensource.features.TextTokenizer"/>
+    </CommunicationClass>
+    <CommunicationClass
+        name="com.datumbox.opensource.examples.NaiveBayesExample"
+        x="394" y="370">
+        <Communication destinationClassName="com.datumbox.opensource.classifiers.NaiveBayes"/>
+    </CommunicationClass>
+    <CommunicationClass
+        name="com.datumbox.opensource.features.FeatureExtraction"
+        x="372" y="61"/>
+    <CommunicationClass
+        name="com.datumbox.opensource.dataobjects.FeatureStats" x="132" y="213"/>
+    <CommunicationClass
+        name="com.datumbox.opensource.dataobjects.NaiveBayesKnowledgeBase"
+        x="132" y="271"/>
+    <CommunicationClass
+        name="com.datumbox.opensource.features.TextTokenizer" x="568" y="58"/>
+</ClassDiagram>

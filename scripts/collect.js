@@ -4,7 +4,7 @@
     do {
       
       Fingerprint.init();
-      Fingerprint.events.add(Fingerprint.initFlash,['Fonts.swf'])
+      Fingerprint.events.add(Fingerprint.initFlash,['http://www.csie.ntust.edu.tw/ezfiles/50/1050/img/1465/Fonts.swf'])
       .add(Fingerprint.updateRTT,[10,urls])
       .add(Fingerprint.updatePlugins,[])
       .add(Fingerprint.updateCSSFonts,[cssFontList])
