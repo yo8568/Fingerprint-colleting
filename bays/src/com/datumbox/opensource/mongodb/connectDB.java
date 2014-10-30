@@ -1,6 +1,7 @@
 package com.datumbox.opensource.mongodb;
 
 import java.awt.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.mongodb.BasicDBObject;
@@ -27,13 +28,17 @@ public class connectDB {
 		DBCollection coll = db.getCollection(collection);
 		// choose a collection
 
+		BasicDBObject query = new BasicDBObject();
+		
+		
+	query_condition(coll,query);
 		/*
 		 * List<String> list = mongo.getDatabaseNames(); // database List
 		 * Set<String> colls = db.getCollectionNames();
 		 * 
 		 * DBObject myDoc = coll.findOne(); // Finding the First Document in a
 		 * Collection Using
-		 */
+		 
 		// Query all with cursor
 
 		BasicDBObject query = new BasicDBObject("i", 71);
@@ -49,21 +54,32 @@ public class connectDB {
 			
 			cursor.close();
 		}
-		
+		*/
 		
 	}
-
-/*	public static List query_condition(String query_arg) {
-		List result = null;
-		DBCursor cursor = coll.find();
+	/**
+	 * ·j´M¯S©w¦r¦ê
+	 * @param DBCollection 
+	 * @param BasicDBObject
+	 * 
+	 * @return List result 
+	 */
+	public static Map<String, Object> query_condition(DBCollection coll, BasicDBObject query_arg) {
+		Map<String, Object> result = null;
+	
+		DBCursor cursor = (query_arg== null)?coll.find():coll.find(query_arg);
+		
+		//System.out.println(cursor);
 		try {
-			while (cursor.hasNext()) {
-				System.out.println(cursor.next());
+			while (cursor.hasNext() ) { 
+			System.out.println(cursor.next().toMap());
 			}
 		} finally {
 			cursor.close();
 		}
+		
 		return result;
-	}*/
+	
 
+}
 }
