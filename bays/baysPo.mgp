@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PackageAnalysis>
+    <Package name="com.datumbox.opensource.classifiers" x="5" y="229">
+        <DependencyLink destination="com.datumbox.opensource.dataobjects"/>
+        <DependencyLink destination="com.datumbox.opensource.features"/>
+    </Package>
+    <Package name="com.datumbox.opensource.dataobjects" x="439" y="525"/>
+    <Package name="com.datumbox.opensource.examples" x="586" y="49">
+        <DependencyLink destination="com.datumbox.opensource.classifiers"/>
+        <DependencyLink destination="com.datumbox.opensource.dataobjects"/>
+    </Package>
+    <Package name="com.datumbox.opensource.features" x="391" y="263">
+        <DependencyLink destination="com.datumbox.opensource.dataobjects"/>
+    </Package>
+</PackageAnalysis>

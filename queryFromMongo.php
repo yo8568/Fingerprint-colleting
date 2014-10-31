@@ -15,7 +15,7 @@ $time_mobile=array();
 * $document['2']['Android']  為記錄判斷手機與Web的OS
 * $document['browser']       為記錄瀏覽器的判斷
 * $browser_unknown_string    為記錄未知的遊覽器資訊
-* $time_mobile
+* $time_mobile 
 * $time_mobile
 *
 *
@@ -113,13 +113,12 @@ $content=  array(
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-   <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+   <link href="css/bootstrap-responsive.css" rel="stylesheet">
    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
-
-   <style type="text/css">
-
-
-   </style>
+<script type="text/javascript">
+  var day_movlie = JSON.parse(<?php echo json_encode(join($time_mobile)); ?>);
+  console.log(day_movlie);
+</script>
    <script type="text/javascript">
       $(function () {
         $('#container2').highcharts({
@@ -158,7 +157,7 @@ $content=  array(
           data: [10,15,9,17,8,22,2,6,7,3,0,1]
        }, {
           name: 'Web',
-          data: []
+          data: [0]
        }]
     });
 });
@@ -248,19 +247,12 @@ $content=  array(
           $a = 'null';
        }else{$a = $data;}
        return $a;
-    }
-
-
-        
+    }     
     ?>
 <div id="container2"></div>
-
- </div><!-- tables ending  -->
-
+</div><!-- tables ending  -->
 </div>
-
 </div>
-
 </div>
 <footer class="footer">
 <div class="container">

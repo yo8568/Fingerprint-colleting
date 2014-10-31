@@ -303,9 +303,15 @@
 	 			name: 'Acrobat',
 	 			ids: ["PDF.PdfCtrl.7", "PDF.PdfCtrl.6", "PDF.PdfCtrl.5", "PDF.PdfCtrl.4", "PDF.PdfCtrl.3", "AcroPDF.PDF.1"],
 	 			getVersion: function(obj, progid)
-	 			{
+	 			{     
 
-	 				return progid.replace(/^[a-zA-Z.]+\.([0-9][0-9.]*)/, "$1");
+	 				
+                    if ($.browser.msie){
+                    	return 0;
+                    }else{
+                    	return progid.replace(/^[a-zA-Z.]+\.([0-9][0-9.]*)/, "$1");
+                    }
+	 				
 	 			}
 	 		},
 	 		{
@@ -507,17 +513,7 @@
 	 {
 
 	 	this.updateTimestamp();
-   if ($.browser.msie && window.XDomainRequest) {
-    // Use Microsoft XDR
-    var xdr = new XDomainRequest();
-    xdr.open("get", url);
-    xdr.onload = function () {
-    var JSON = $.parseJSON(fingerprint);
- 
-    processData(JSON);
-    };
-    xdr.send();
-} else {
+
          
 	 	$.ajax({
 	 		type: 'POST',
@@ -529,7 +525,6 @@
 	 		error: error,
 	 		success: success
 	 	});
-}
 	 },
 
 	/**
