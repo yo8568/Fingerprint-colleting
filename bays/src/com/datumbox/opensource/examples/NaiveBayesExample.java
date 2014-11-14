@@ -29,6 +29,9 @@ import java.util.Map;
 
 import com.datumbox.opensource.classifiers.NaiveBayes;
 import com.datumbox.opensource.dataobjects.NaiveBayesKnowledgeBase;
+import com.datumbox.opensource.mongodb.connectDB;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
 
 /**
  *
@@ -66,7 +69,28 @@ public class NaiveBayesExample {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-        //map of dataset files
+        
+    	connectDB instance = new connectDB();
+		DBCollection fp = instance.getConnect();
+		//Pattern john = Pattern.compile("54167453d19088084ae504f7", Pattern.CASE_INSENSITIVE);
+		BasicDBObject y = new BasicDBObject("width",1680);
+		BasicDBObject x = new BasicDBObject("uid", "4X1AAmlTIgSaqEsC10g2");
+		BasicDBObject query = null;
+
+		Map<String, String[]> result = new HashMap<String, String[]>();
+		Map<String, Object> filter = new HashMap<String, Object>();
+		
+		result = instance.query_condition(fp, query);
+		
+		/* for (Object key : result.keySet()) {
+	           // System.out.println(key + " : " + result.get(key));
+	        }*/
+    	/**/
+		
+		
+		
+		
+    	//map of dataset files
         Map<String, URL> trainingFiles = new HashMap<>();
         
         trainingFiles.put("English", NaiveBayesExample.class.getResource("datasets/training.language.en.txt"));
@@ -77,9 +101,24 @@ public class NaiveBayesExample {
         Map<String, String[]> trainingExamples = new HashMap<>();
         for(Map.Entry<String, URL> entry : trainingFiles.entrySet()) {
             trainingExamples.put(entry.getKey(), readLines(entry.getValue()));
-          System.out.println(entry.getValue());
+          System.out.println(entry.getKey());
         }
+       /* Map<String, String[]> trainingExamples = new HashMap<>();
         
+        for(Object key : result.keySet()) {
+        
+            trainingExamples.put();
+          
+        }
+        for (Object key : trainingExamples.keySet()) {
+	            
+        	System.out.println(key + " : " );
+        	for(String token:trainingExamples.get(key)){
+        		System.out.println(token);
+        		
+        	}
+	        }*/
+       
         //train classifier
         NaiveBayes nb = new NaiveBayes();
         nb.setChisquareCriticalValue(6.63); //0.01 pvalue

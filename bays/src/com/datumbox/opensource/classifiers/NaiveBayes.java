@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Implements a basic form of Multinomial Naive Bayes Text Classifier as described at
@@ -97,11 +98,11 @@ public class NaiveBayes {
         
         Document doc;
         
-        Iterator<Map.Entry<String, String[]>> it = trainingDataset.entrySet().iterator();
+        Iterator<Entry<String, String[]>> it = trainingDataset.entrySet().iterator();
         
         //loop through all the categories and training examples
         while(it.hasNext()) {
-            Map.Entry<String, String[]> entry = it.next();
+            Entry<String, String[]> entry = it.next();
             category = entry.getKey();
             examples = entry.getValue();
             
