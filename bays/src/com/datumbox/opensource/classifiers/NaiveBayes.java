@@ -108,9 +108,15 @@ public class NaiveBayes {
             
             for(int i=0;i<examples.length;++i) {
                 //for each example in the category tokenize its text and convert it into a Document object.
-                doc = TextTokenizer.tokenize(examples[i]);
+               try{
+            	   doc = TextTokenizer.tokenize(examples[i]);
                 doc.category = category;
                 dataset.add(doc);
+            	   
+               }catch(NullPointerException e){
+            	   
+               }
+            	
                 
                 //examples[i] = null; //try freeing some memory
             }

@@ -69,7 +69,7 @@ public class NaiveBayesExample {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-        
+        //將DATASET從MongoDB query 出來
     	connectDB instance = new connectDB();
 		DBCollection fp = instance.getConnect();
 		//Pattern john = Pattern.compile("54167453d19088084ae504f7", Pattern.CASE_INSENSITIVE);
@@ -92,17 +92,27 @@ public class NaiveBayesExample {
 		
     	//map of dataset files
         Map<String, URL> trainingFiles = new HashMap<>();
-        
+        /*
         trainingFiles.put("English", NaiveBayesExample.class.getResource("datasets/training.language.en.txt"));
         trainingFiles.put("French", NaiveBayesExample.class.getResource("datasets/training.language.fr.txt"));
-        trainingFiles.put("German", NaiveBayesExample.class.getResource("datasets/training.language.de.txt"));
+        trainingFiles.put("German", NaiveBayesExample.class.getResource("datasets/training.language.de.txt"));*/
+        trainingFiles.put("English", NaiveBayesExample.class.getResource("datasets/training.language.en.txt"));
+        
      
         //loading examples in memory
         Map<String, String[]> trainingExamples = new HashMap<>();
-        for(Map.Entry<String, URL> entry : trainingFiles.entrySet()) {
-            trainingExamples.put(entry.getKey(), readLines(entry.getValue()));
-          System.out.println(entry.getKey());
+        for(String entry : result.keySet()) {
+            trainingExamples.put(entry,result.get(entry));
+          //System.out.println(entry.getKey());
         }
+        /* 印出 trainingExamples
+        for (Object key : trainingExamples.keySet()) {
+	            System.out.println(key + " : " + trainingExamples.get(key));
+	            for(int i = 0;i<=trainingExamples.get(key).length;i++){
+	            	//System.out.println(trainingExamples.get(key)[i]);
+	            }
+	        }
+        */
        /* Map<String, String[]> trainingExamples = new HashMap<>();
         
         for(Object key : result.keySet()) {
@@ -136,7 +146,9 @@ public class NaiveBayesExample {
         String exampleEn = "I am English";
         String outputEn = nb.predict(exampleEn);
         System.out.format("The sentense \"%s\" was classified as \"%s\".%n", exampleEn, outputEn);
+      
         
+        /* 
         String exampleFr = "Je suis Fran癟ais";
         String outputFr = nb.predict(exampleFr);
         System.out.format("The sentense \"%s\" was classified as \"%s\".%n", exampleFr, outputFr);
@@ -145,7 +157,7 @@ public class NaiveBayesExample {
         String outputDe = nb.predict(exampleDe);
         System.out.format("The sentense \"%s\" was classified as \"%s\".%n", exampleDe, outputDe);
         
-
+*/
     }
     
 }

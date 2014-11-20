@@ -158,7 +158,9 @@ public class connectDB {
 					// System.out.println(data);
 			         //System.out.println(key1);
 			        }
-				 map.put(key,data);
+				 
+				 if(data[0]!=null)map.put(data[0],data);
+				 else map.put(key,data);
 				 i++;
 			}
 		} finally {
