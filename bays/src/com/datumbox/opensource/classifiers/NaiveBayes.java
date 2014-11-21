@@ -99,13 +99,13 @@ public class NaiveBayes {
         Document doc;
         
         Iterator<Entry<String, String[]>> it = trainingDataset.entrySet().iterator();
-        
+              int ecount = 0;
         //loop through all the categories and training examples
         while(it.hasNext()) {
             Entry<String, String[]> entry = it.next();
             category = entry.getKey();
             examples = entry.getValue();
-            
+      
             for(int i=0;i<examples.length;++i) {
                 //for each example in the category tokenize its text and convert it into a Document object.
                try{
@@ -114,7 +114,8 @@ public class NaiveBayes {
                 dataset.add(doc);
             	   
                }catch(NullPointerException e){
-            	   
+            	   ecount++;
+            	  // System.out.println("²Ä"+ecount+"¦¸¨Ò¥~");
                }
             	
                 

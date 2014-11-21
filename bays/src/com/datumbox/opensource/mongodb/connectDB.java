@@ -16,7 +16,7 @@ public class connectDB {
 
 	private static String url = "mongodb://140.118.155.213";
 	private static String DBase = "fingerprints";
-	private static String collection = "csie";
+	private static String collection = "csie2";
 
 	public connectDB() {
 		Map<String, Object> dataset = new HashMap<String, Object>();
@@ -138,20 +138,20 @@ public class connectDB {
 			        	 //System.out.println(temp.get("timestamp"));
 			        	 data[9]= temp.get("timestamp").toString();
 			         }
-			         if(key1.toString().equals("0")){
+			         if(key1.toString().equals("0")){//ip
 			        	// System.out.println(temp.get("0"));
 			        	 data[10]=temp.get("0").toString();
 
 			         }
-			         if(key1.toString().equals("1")){
+			         if(key1.toString().equals("1")){//time
 			        	// System.out.println(temp.get("1"));
 			        	 data[11]=temp.get("1").toString();
 			         }
-			         if(key1.toString().equals("2")){
+			         if(key1.toString().equals("2")){//mobile
 			        	// System.out.println(temp.get("2"));
 			        	 data[12]=temp.get("2").toString();
 			         }
-			         if(key1.toString().equals("3")){
+			         if(key1.toString().equals("3")){//server
 			        	 //System.out.println(temp.get("3"));
 			            data[13]=temp.get("3").toString();
 			         }
