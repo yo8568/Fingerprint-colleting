@@ -41,7 +41,7 @@ public class connectDB {
 		DBCollection fp = instance.getConnect();
 		//Pattern john = Pattern.compile("54167453d19088084ae504f7", Pattern.CASE_INSENSITIVE);
 		BasicDBObject y = new BasicDBObject("width",1680);
-		BasicDBObject x = new BasicDBObject("uid", "4X1AAmlTIgSaqEsC10g2");
+		BasicDBObject x = new BasicDBObject("_id", "545f51d3d19088a021eb91fb");
 		BasicDBObject query = x;
 
 		Map<String, String[]> result = new HashMap<String,  String[]>();
@@ -204,6 +204,25 @@ public class connectDB {
 		
 		
 		return map;
+	}
+	public static String accurantquery(BasicDBObject query_arg , int feature_no) throws UnknownHostException{
+		String real = null;
+	    Map<String, Object> map = new HashMap<String, Object>();
+		
+		connectDB instance = new connectDB();
+		DBCollection fp = instance.getConnect();
+		BasicDBObject query = new BasicDBObject();
+
+		BasicDBObject con1 = new BasicDBObject("width",1680);
+		
+		Map<String, String[]> result = new HashMap<String, String[]>();
+		result = query_condition(fp, query);
+		
+		
+		
+		return real;
+		
+		
 	}
 
 }

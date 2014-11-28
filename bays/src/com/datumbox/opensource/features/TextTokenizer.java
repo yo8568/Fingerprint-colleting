@@ -50,7 +50,7 @@ public class TextTokenizer {
      * @return 
      */
     public static String[] extractKeywords(String text) {
-        return text.split(":|\"");
+        return text.split("(?<=\\})(?=\\{)");
     }
     
     /**
@@ -86,9 +86,7 @@ public class TextTokenizer {
         
         Document doc = new Document();
         doc.tokens = getKeywordCounts(keywordArray);
-        for(String token:doc.tokens.keySet()){
-        	System.out.println(token+":"+doc.tokens.get(token));
-        }
+      
         return doc;
     }
 }
