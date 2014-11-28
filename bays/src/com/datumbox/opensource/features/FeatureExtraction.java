@@ -16,11 +16,12 @@
  */
 package com.datumbox.opensource.features;
 
-import com.datumbox.opensource.dataobjects.Document;
-import com.datumbox.opensource.dataobjects.FeatureStats;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.datumbox.opensource.dataobjects.Document;
+import com.datumbox.opensource.dataobjects.FeatureStats;
 
 /**
  * FeatureExtraction class which is used to generate the FeatureStats Object 

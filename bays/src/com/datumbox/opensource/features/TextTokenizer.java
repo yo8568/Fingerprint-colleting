@@ -16,10 +16,11 @@
  */
 package com.datumbox.opensource.features;
 
-import com.datumbox.opensource.dataobjects.Document;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import com.datumbox.opensource.dataobjects.Document;
 
 /**
  * TextTokenizer class used to tokenize the texts and store them as Document
@@ -49,7 +50,7 @@ public class TextTokenizer {
      * @return 
      */
     public static String[] extractKeywords(String text) {
-        return text.split(" ");
+        return text.split(":|\"");
     }
     
     /**
@@ -85,6 +86,9 @@ public class TextTokenizer {
         
         Document doc = new Document();
         doc.tokens = getKeywordCounts(keywordArray);
+        for(String token:doc.tokens.keySet()){
+        	System.out.println(token+":"+doc.tokens.get(token));
+        }
         return doc;
     }
 }

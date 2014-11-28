@@ -24,7 +24,7 @@ public class connectDB {
 
 	public DBCollection getConnect() throws UnknownHostException {
 		MongoClient mongo = new MongoClient(new MongoClientURI(url));
-		// ³sµ²MongoDB server
+		// ï¿½sï¿½ï¿½MongoDB server
 		DB db = mongo.getDB(DBase);
 		// choose a database
 		DBCollection coll = db.getCollection(collection);
@@ -72,8 +72,8 @@ public class connectDB {
 	}
 
 	/**
-	 * ·j´M¯S©w±ø¥ó¤§data 
-	 * µM«áÂà¦¨Map 
+	 * ï¿½jï¿½Mï¿½Sï¿½wï¿½ï¿½ï¿½data 
+	 * ï¿½Mï¿½ï¿½ï¿½à¦¨Map 
 	 * 
 	 * @param DBCollection
 	 * @param BasicDBObject
@@ -97,7 +97,7 @@ public class connectDB {
 				
 				String[] data = new String[14];
 				 for (Object key1 : temp.keySet()) {
-					 //Map ³B²z
+					 //Map ï¿½Bï¿½z
 					 if(key1.toString().equals("_id")){
 				        	// System.out.println((String)temp.get("uid"));
 				        	 data[0]= temp.get("_id").toString();
@@ -140,15 +140,24 @@ public class connectDB {
 			         }
 			         if(key1.toString().equals("0")){//ip
 			        	// System.out.println(temp.get("0"));
-			        	 data[10]=temp.get("0").toString();
+			        	 if(temp.get("0").toString().contains("ip")&&(!temp.get("0").toString().contains("iPhone"))){
+			        		  data[10]=temp.get("0").toString();
+			        	 }
+			        	
 
 			         }
 			         if(key1.toString().equals("1")){//time
 			        	// System.out.println(temp.get("1"));
+			        	 if(temp.get("0").toString().contains("ip")&&(!temp.get("0").toString().contains("iPhone"))){
+			        		  data[10]=temp.get("1").toString();
+			        	 }
 			        	 data[11]=temp.get("1").toString();
 			         }
 			         if(key1.toString().equals("2")){//mobile
 			        	// System.out.println(temp.get("2"));
+			        	 if(temp.get("0").toString().contains("ip")&&(!temp.get("0").toString().contains("iPhone"))){
+			        		  data[10]=temp.get("2").toString();
+			        	 }
 			        	 data[12]=temp.get("2").toString();
 			         }
 			         if(key1.toString().equals("3")){//server

@@ -84,7 +84,7 @@ public class NaiveBayes {
     }
     
     /**
-     * ¥ý³B²zRaw Dataset
+     * ï¿½ï¿½Bï¿½zRaw Dataset
      * Preprocesses the original dataset and converts it to a List of Documents.
      * 
      * @param trainingDataset
@@ -112,13 +112,13 @@ public class NaiveBayes {
             	   doc = TextTokenizer.tokenize(examples[i]);
                 doc.category = category;
                 dataset.add(doc);
-            	   
+                // System.out.println("ï¿½ï¿½"+ecount+"ï¿½ï¿½ï¿½Ò¥~");
                }catch(NullPointerException e){
             	   ecount++;
-            	  // System.out.println("²Ä"+ecount+"¦¸¨Ò¥~");
+            	  // System.out.println("ï¿½ï¿½"+ecount+"ï¿½ï¿½ï¿½Ò¥~");
                }
             	
-                
+            // System.out.println(category+":"+examples);
                 //examples[i] = null; //try freeing some memory
             }
             

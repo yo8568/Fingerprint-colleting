@@ -49,7 +49,7 @@ public class NaiveBayesExample {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String[] readLines(URL url) throws IOException {
+	/*public static String[] readLines(URL url) throws IOException {
 
 		Reader fileReader = new InputStreamReader(url.openStream(),
 				Charset.forName("UTF-8"));
@@ -63,7 +63,7 @@ public class NaiveBayesExample {
 		}
 		return lines.toArray(new String[lines.size()]);
 	}
-
+*/
 	/**
 	 * Main method
 	 * 
@@ -72,7 +72,7 @@ public class NaiveBayesExample {
 	 * @throws java.io.IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		// 將DATASET從MongoDB query 出來
+		// 嚙瞇DATASET嚙緬MongoDB query 嚙碼嚙踝蕭
 		connectDB instance = new connectDB();
 		DBCollection fp = instance.getConnect();
 		// Pattern john = Pattern.compile("54167453d19088084ae504f7",
@@ -112,7 +112,7 @@ public class NaiveBayesExample {
 			trainingExamples.put(entry, result.get(entry));
 			// System.out.println(entry.getKey());
 		}
-		/* 印出 trainingExamples */
+		/* 嚙盤嚙碼 trainingExamples */
 		String cookie[] = new String[10000];
 		int cookie_null = 0;
 		int key_no = 0;
@@ -148,8 +148,8 @@ public class NaiveBayesExample {
 				cookie_count++;
 			}
 		}
-		System.out.println("用ip分類有" + cookie_count + "組");
-		System.out.println("ip無值有" + cookie_null + "筆");
+		System.out.println("According to IP, it classified dataset to generate  " + cookie_count + " sets");
+		System.out.println("Null ip set iclude " + cookie_null + " instances");
 		System.out.println(key_no);
 		
 		
