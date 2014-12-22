@@ -87,6 +87,7 @@ public class NaiveBayesExample {
 
 		// map of dataset files
 		Map<String, URL> trainingFiles = new HashMap<>();
+		
 		/*
 		 * trainingFiles.put("English",
 		 * NaiveBayesExample.class.getResource("datasets/training.language.en.txt"
@@ -98,20 +99,34 @@ public class NaiveBayesExample {
 		 */
 		// trainingFiles.put("English",
 		// NaiveBayesExample.class.getResource("datasets/training.language.en.txt"));
-		BufferedWriter bw = new BufferedWriter(new FileWriter("text.txt"));
-		BufferedWriter bw2 = new BufferedWriter(new FileWriter("text2.txt"));
-		String[] s = new String[10000];
-		String[] s2 = new String[10000];
+		
+		
+		
+		
+		
+		String[] s = new String[1000000];
+		String[] s2 = new String[1000000];
 		// loading examples in memory
 		Map<String, String[]> trainingExamples = new HashMap<>();
 		Map<String, String[]> trainingdata = new HashMap<>();
 
 		for (String entry : result.keySet()) {
 			trainingExamples.put(entry, result.get(entry));
-			// System.out.println(entry.getKey());
+			//for(int i = 0; i<=result.get(entry).length;i++)
+			   //      System.out.println(result.get(entry)[i]);
 		}
+		
+		
 		/* trainingExamples */
-		String cookie[] = new String[10000];
+		
+		
+		/*
+		 * catch some info from trainingExamples to trainingdata
+		 * 
+		 * 
+		 * 
+		 * 
+		String cookie[] = new String[1000000];
 		int cookie_null = 0;
 		int key_no = 0;
 		int feature = 11;//11->ip 1->cookie
@@ -119,7 +134,7 @@ public class NaiveBayesExample {
 		for (Object key : trainingExamples.keySet()) {
 			key_no++;
 			boolean flag = false;
-			if (trainingExamples.get(key)[1] == null) {
+			if (trainingExamples.get(key)[feature] == null) {
 				cookie_null++;
 			} else {
 				for (int str_compare = 0; str_compare < cookie.length; str_compare++) {
@@ -142,10 +157,10 @@ public class NaiveBayesExample {
 				} 
 				s[key_no]= trainingExamples.get(key)[feature];
 			    s2[key_no]= (String)key;
-				// System.out.println(trainingExamples.get(key)[feature]);
+				System.out.println(trainingExamples.get(key)[feature]);
 				String[] featurearr = { trainingExamples.get(key)[feature] };
 				trainingdata.put((String) key, featurearr);
-
+                
 			}
 
 		}
@@ -159,18 +174,9 @@ public class NaiveBayesExample {
 				.println("According to IP, it classified dataset to generate  "
 						+ cookie_count + " sets");
 		System.out.println("Null ip set iclude " + cookie_null + " instances");
-		System.out.println(key_no);
-		for (int i = 0; i < s.length; i++) {
-			try {
-				bw.write(s[i]);
-				bw2.write(s2[i]+",");
-			} catch (NullPointerException e) {
-
-			}
-		}
-
-		bw.close();
-		bw2.close();
+		System.out.println(key_no);*/
+		trainingdata=feature_put(trainingExamples,11,2,3);
+	
 		/*
 		 * Map<String, String[]> trainingExamples = new HashMap<>();
 		 * 
@@ -200,7 +206,7 @@ public class NaiveBayesExample {
 		FileReader fr = new FileReader("text.txt");
 
 		BufferedReader br = new BufferedReader(fr);
-        String[] brarray = new String[1000];
+        String[] brarray = new String[100000];
 		while (br.ready()) {
 
 			brarray = br.readLine().split("(?<=\\})(?=\\{)");
@@ -216,7 +222,7 @@ public class NaiveBayesExample {
         FileReader fr2 = new FileReader("text2.txt");
 
 		BufferedReader br2 = new BufferedReader(fr2);
-        String[] brarray2 = new String[1000];
+        String[] brarray2 = new String[100000];
 		while (br2.ready()) {
 
 			brarray2 = br2.readLine().split(",");
@@ -225,35 +231,30 @@ public class NaiveBayesExample {
 
 		fr2.close();
 		nb = new NaiveBayes(knowledgeBase);
-		String exampleEn = "guuLsdEHsaL5KgSqzN3x";
+	
 		double accuracy_count =0.0;
 		double total =0.0;
 		FileWriter fw = new FileWriter("unmatch.txt");
         for(int i=0 ; i<brarray2.length;i++){
         	System.out.println(brarray2[i]);
+        	
         	String outputEn = nb.predict(brarray[i]);
         	total++;
         	
         	if(outputEn.equals(brarray2[i])){
         		accuracy_count++;
-        		   
-        		   
-        		          
-        		   
-        		           
-        		        	}else{
-        		        		 fw.write("The sentense"+brarray[i] +" was classified as "+outputEn+"and real id was"+brarray2[i]+"   ");
-        		        		
-        		        	}
-    		System.out.format("The sentense \"%s\" was classified as \"%s\"and real id was\"%s\" .%n",
-    				brarray[i] , outputEn,brarray2[i]);
+        		   }else{
+         fw.write("The sentense"+brarray[i] +" was classified as "+outputEn+"and real id was"+brarray2[i]+"   ");
+        }
+    	System.out.format("The sentense \"%s\" was classified as \"%s\"and real id was\"%s\" .%n",
+    	brarray[i] , outputEn,brarray2[i]);
         }
         
         double accuracy=accuracy_count/total;
-        System.out.println("總數:"+total);
-        System.out.println("沒命中個數:"+(total-accuracy_count));
-        System.out.println("命中個數:"+accuracy_count);
-        System.out.println("命中率:"+accuracy);
+        System.out.println("Total:"+total);
+        System.out.println("The number of hitless:"+(total-accuracy_count));
+        System.out.println("The number of hit:"+accuracy_count);
+        System.out.println("Accuracy:"+accuracy);
 		// Use classifier
 		fw.flush();
         		   
@@ -273,6 +274,76 @@ public class NaiveBayesExample {
 		 * System.out.format("The sentense \"%s\" was classified as \"%s\".%n",
 		 * exampleDe, outputDe);
 		 */
+	}
+	public static Map<String,String[]> feature_put(Map<String, String[]> trainingExamples, int feature,int feature2,int feature3) throws IOException{
+	
+		BufferedWriter bw = new BufferedWriter(new FileWriter("text.txt"));
+		BufferedWriter bw2 = new BufferedWriter(new FileWriter("text2.txt"));
+		String[] s = new String[1000000];
+		String[] s2 = new String[1000000];
+		
+		Map<String,String[]> map = new HashMap<>();
+		
+		String cookie[] = new String[1000000];
+		int cookie_null = 0;
+		int key_no = 0;
+
+		for (Object key : trainingExamples.keySet()) {
+			key_no++;
+			boolean flag = false;
+			if (trainingExamples.get(key)[feature] == null) {
+				cookie_null++;
+			} else {
+				for (int str_compare = 0; str_compare < cookie.length; str_compare++) {
+					if (cookie[str_compare] != null) {
+						if (cookie[str_compare].equals(trainingExamples
+								.get(key)[feature])) {
+							flag = true;
+						}
+					}
+				}
+				if (!flag) {
+					int com_new_one = 0;
+					for (int com_new = 0; com_new < cookie.length; com_new++) {
+						if (cookie[com_new] != null) {
+							com_new_one++;
+						}
+					}
+					cookie[com_new_one] = trainingExamples.get(key)[feature];
+					
+				} 
+				s[key_no]= trainingExamples.get(key)[feature];
+			    s2[key_no]= (String)key;
+			    System.out.println(trainingExamples.get(key)[feature]);
+			System.out.println(trainingExamples.get(key)[feature2]);
+				String[] featurearr = { trainingExamples.get(key)[feature] ,trainingExamples.get(key)[feature2]};
+				map.put((String) key, featurearr);
+                
+			}
+
+		}
+		int cookie_count = 0;
+		for (int i = 0; i < cookie.length; i++) {
+			if (cookie[i] != null) {
+				cookie_count++;
+			}
+		}
+		System.out
+				.println("According to IP, it classified dataset to generate  "
+						+ cookie_count + " sets");
+		System.out.println("Null ip set iclude " + cookie_null + " instances");
+		System.out.println(key_no);
+		for (int i = 0; i < s.length; i++) {
+			try {
+				bw.write(s[i]);
+				bw2.write(s2[i]+",");
+			} catch (NullPointerException e) {
+
+			}
+		}
+		bw.close();
+		bw2.close();
+		return map;
 	}
 
 }
