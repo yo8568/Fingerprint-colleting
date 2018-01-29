@@ -4,7 +4,7 @@
 
 ## Installation
      
-1.放到 <body> tag 中
+1. 放到 <body> tag 中
 
      <script src="test/scripts/ext/swfobject.js" type="text/javascript" />
      <script src="test/scripts/ext/jquery-1.6.4.min.js" type="text/javascript" />
@@ -18,11 +18,11 @@
      $db = $con->fingerprints;
      $collection = $db->createCollection("test"); 
      
-1.把Fonts.swf放在網站之伺服器上
+1. 把Fonts.swf放在網站之伺服器上
 
      改路徑 collect.js   Fingerprint.events.add(Fingerprint.initFlash,['Fonts.swf路徑'])
 
 ## Licence
 
-MIT @yo8568
+MIT
     
